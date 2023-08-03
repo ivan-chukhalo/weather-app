@@ -1,4 +1,7 @@
 import { forecastType } from '../types'
+import Sunrise from '../components/Icons/Sunrise'
+import Sunset from '../components/Icons/Sunset'
+import { getSunTime } from '../helpers'
 
 type Props = {
   data: forecastType
@@ -14,7 +17,7 @@ const Degree = ({ temp }: { temp: number }): JSX.Element => (
 const Forecast = ({ data }: Props): JSX.Element => {
   const today = data.list[0]
   return (
-    <div className="w-full md:max-w-[500px] py-4 md:py-4 md:px-10 lg:px-24 h-full lg:h-auto bg-white bg-opacity-20 backdrop-blur-ls rounded drop-shadow-lg">
+    <div className="w-full md:max-w-[500px] py-4 md:py-4 md:px-10 lg:px-24 h-full lg:h-auto bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
       <div className="mx-auto w-[300px]">
         <section className="text-center">
           <h2 className="text-2xl front-black">
@@ -52,6 +55,16 @@ const Forecast = ({ data }: Props): JSX.Element => {
               </p>
             </div>
           ))}
+        </section>
+        <section className="flex justify-between text-zinc-700">
+          <div className="w-[140px] text-xs font-bold flex flex-col items-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg py-4 mb-5">
+            <Sunrise />
+            <span className='mt-2'>{getSunTime(data.sunrise)}</span>
+          </div>
+          <div className="w-[140px] text-xs font-bold flex flex-col items-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg py-4 mb-5">
+            <Sunset />
+            <span className='mt-2'>{getSunTime(data.sunset)}</span>
+          </div>
         </section>
       </div>
     </div>
